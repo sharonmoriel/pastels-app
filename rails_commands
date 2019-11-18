@@ -1,0 +1,4 @@
+# Rails Commands
+rails g model pastel name:string description:text price:decimal stock:integer photo:string user:references
+rails g model order pastel:references user:references quantity:integer order_date:date
+rails g model review content:text order:references
