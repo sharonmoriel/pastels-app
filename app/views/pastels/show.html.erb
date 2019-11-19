@@ -1,11 +1,11 @@
 <div class="row justify-content-center">
   <div class="col-6 text-center">
-    <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png", class: "img-thumbnail", style: 'height:250px;width:auto;' %>
+    <%= image_tag @pastel.photo, class: "img-thumbnail", style: 'height:250px;width:auto;' %>
     <h2><%= @pastel.name %></h2>
     <p>Description: <%= @pastel.description %></p>
     <p>Price: <%= @pastel.price %></p>
     <p>Available: <%= @pastel.stock %></p>
     <%= link_to 'Remove', pastel_path(@pastel), method: :delete, class: 'btn btn-danger' %>
-    <%= link_to 'Edit', pastel_path, method: :edit, class: 'btn btn-outline-secondary' %>
+    <%= link_to 'Edit', edit_pastel_path(@pastel), class: 'btn btn-outline-secondary' %>
   </div>
 </div>
