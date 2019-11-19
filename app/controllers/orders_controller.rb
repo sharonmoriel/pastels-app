@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :review]
 
   def show
   end
@@ -10,15 +10,17 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
+    @order.user = current_user
 
     if @order.save
+      @pastel = @order.pastel
+      @pastel.stock -= @order.quantity
+      @pastel.save!
       redirect_to order_path(@order)
     else
       render :new
       # needs to be changed when we have a pastel show page
     end
-
-    #render :new unless @order.save
   end
 
   def edit
@@ -26,7 +28,7 @@ class OrdersController < ApplicationController
 
   def update
     if @order.update(order_params)
-      redirect_to order_path(@order), notice: 'Updated!'
+      redirect_to order_path(@order)
     else
       render :edit # print edit.html.erb
     end
@@ -38,6 +40,9 @@ class OrdersController < ApplicationController
     redirect_to order_path(@order.user)
   end
 
+  def review
+  end
+
   private
 
   def set_order
@@ -45,6 +50,6 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:pastel_id, :user_id, :quantity, :order_date)
+    params.require(:order).permit(:pastel_id, :user_id, :quantity, :order_date, :review)
   end
 end

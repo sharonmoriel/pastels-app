@@ -1,10 +1,32 @@
-<h1> Pastel id =  <%= @order.pastel_id%> </h1>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-sm-5">
+      <h2 class="mb-3 text-center">You're almost there...here is your order</h2>
+      <table class="table">
+        <thead>
+          <th scope="col">Pastel</th>
+          <th scope="col">Qty</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= @order.pastel.name %></td>
+            <td><%= @order.quantity %></td>
+          </tr>
+          <tr>
+            <td>Total: € <%= @order.pastel.price * @order.quantity %></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="text-center">
+        <%= link_to 'Update Order', edit_order_path(@order), class: 'btn btn-outline-secondary btn-sm' %>
+        <% if DateTime.now > @order.order_date %>
+        <%= link_to 'Review', review_order_path(@order), class: 'btn btn-outline-secondary btn-sm' %>
+        <% else %>
+        <%= link_to 'Review', review_order_path(@order), class: 'btn btn-outline-secondary btn-sm disabled' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
 
 
-<h2> User id = <%= @order.user_id%></h2>
-<h3> Quantity <%= @order.quantity  %> Pastels</h3>
-<h3> Review Pastels</h3>
-<h3> <%= @order.review  %> </h3>
-
-<%= link_to 'Update Order', edit_order_path(@order), class: 'btn btn-outline-secondary btn-sm' %>
-<%= link_to 'Checkout', order_path(@order), class: 'btn btn-outline-secondary btn-sm' %>
