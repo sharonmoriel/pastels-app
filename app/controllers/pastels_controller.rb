@@ -14,7 +14,7 @@ class PastelsController < ApplicationController
     @pastel.user = current_user
 
     if @pastel.save
-      # redirect_to user_path(current_user)
+      redirect_to pastels_path
     else
       render :new
     end
