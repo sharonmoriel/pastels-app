@@ -1,6 +1,9 @@
 class OrdersController < ApplicationController
   before_action :set_order
 
+  def show
+  end
+
   def new
     @orders = Order.new
   end
@@ -8,11 +11,7 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
 
-    if @order.save
-      redirect_to order_path(@order)
-    else
-      render :new
-    end
+    render :new unless @order.save
   end
 
   def edit
@@ -20,7 +19,7 @@ class OrdersController < ApplicationController
 
   def update
     if @order.update(order_params)
-      redirect_to order_path(@order)
+      redirect_to order_path(@order), notice: 'Updated!'
     else
       render :edit # print edit.html.erb
     end
