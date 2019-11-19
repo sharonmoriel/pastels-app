@@ -5,7 +5,8 @@
       <% @pastels.each do |pastel| %>
       <div class="card m-2" style="width: 18rem;">
         <%= link_to pastel, class: 'btn' do %>
-        <img class="card-img-top" src="https://source.unsplash.com/1600x900/?pastel-de-nata" alt="Card image cap">
+        <!-- <img class="card-img-top" src="https://source.unsplash.com/1600x900/?pastel-de-nata" alt="Card image cap"> -->
+        <%= cl_image_tag(pastel.photo, class: "card-img-top") %>
         <% end %>
         <div class="card-body">
           <h5 class="card-title"><%= pastel.name %></h5>
