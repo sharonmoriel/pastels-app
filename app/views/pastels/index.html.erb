@@ -1,2 +1,13 @@
+<<<<<<< HEAD
 <h1>Pastels</h1>
 <h2><%= Pastel.all %></h2>
+=======
+<% @pastels.each do |pastel| %>
+<ul>
+  <li><%= pastel.name %></li>
+  <li><%= pastel.description %>
+  <li><%= pastel.price %> - euros</li>
+</ul>
+<hr>
+<% end %>
+>>>>>>> 9613eb4857c9a861729495ba48947a3a293c3caf
