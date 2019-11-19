@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_order
+  before_action :set_order, only: [:show, :edit, :update, :destroy]
 
   def show
   end
@@ -12,9 +12,10 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
 
     if @order.save
-      redirect_to order_path
+      redirect_to order_path(@order)
     else
-      render :edit
+      render :new
+      # needs to be changed when we have a pastel show page
     end
 
     #render :new unless @order.save
