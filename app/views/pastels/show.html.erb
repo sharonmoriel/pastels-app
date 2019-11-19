@@ -1,6 +1,6 @@
 <div class="row justify-content-center">
   <div class="col-6 text-center">
-    <%= image_tag @pastel.photo, class: "img-thumbnail", style: 'height:250px;width:auto;' %>
+    <%= cl_image_tag(@pastel.photo) %>
     <h2><%= @pastel.name %></h2>
     <p>Description: <%= @pastel.description %></p>
     <p>Price: <%= @pastel.price %></p>
