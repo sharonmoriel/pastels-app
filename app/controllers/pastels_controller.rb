@@ -6,15 +6,17 @@ class PastelsController < ApplicationController
   end
 
   def new
+    @user = User.find(params[:user_id])
     @pastel = Pastel.new
   end
 
   def create
-    @pastel = Pastel.new(garden_params)
-    @pastel.user = current_user
+    @user = User.find(params[:user_id])
+    @pastel = Pastel.new(pastel_params)
+    @pastel.user = @user
 
     if @pastel.save
-      redirect_to pastel_path
+      redirect_to user_pastels_path(@user)
     else
       render :new
     end
@@ -40,6 +42,6 @@ class PastelsController < ApplicationController
   end
 
   def pastel_params
-    params.require(:pastel).permit(:name, :size, :photo_url, :covered, :location)
+    params.require(:pastel).permit(:name, :description, :stock, :photo)
   end
 end
