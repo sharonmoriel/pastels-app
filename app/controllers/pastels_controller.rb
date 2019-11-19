@@ -5,6 +5,10 @@ class PastelsController < ApplicationController
     @pastels = Pastel.all
   end
 
+  def show
+    @order = Order.new
+  end
+
   def new
     @pastel = Pastel.new
   end
@@ -18,9 +22,6 @@ class PastelsController < ApplicationController
     else
       render :new
     end
-  end
-
-  def show
   end
 
   def edit

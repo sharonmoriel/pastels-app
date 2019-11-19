@@ -1,12 +1,19 @@
-<h2> Updating Your Order </h2>
-<%= simple_form_for @order do |f| %>
-  <%= f.input :quantity%>
-  <%= f.input :order_date %>
-  <%= f.input :review %>
-  <%= f.submit %>
-<% end %>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-sm-5">
+      <h2 class="text-center">What would you like to change in your order</h2>
+      <%= simple_form_for @order do |f| %>
+        <%= f.input :quantity, input_html: { min: '0', max: "#{@order.pastel.stock}" }%>
+        <%= f.input :order_date %>
+        <div class="text-center">
+          <%= f.submit class:'btn btn-outline-secondary' %>
+          <%= link_to 'Cancel', order_path(@order), class: 'btn btn-outline-secondary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
 
-<%= link_to 'Confirm', order_path(@order), class: 'btn btn-outline-secondary btn-sm' %>
 
-<%=  alert = "Your order has been placed!" %>
+
 
