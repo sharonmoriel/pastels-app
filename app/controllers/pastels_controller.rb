@@ -27,6 +27,11 @@ class PastelsController < ApplicationController
   end
 
   def update
+    if @pastel.update(pastel_params)
+      redirect_to pastel_path(@pastel)
+    else
+      render :edit # print edit.html.erb
+    end
   end
 
   def destroy
