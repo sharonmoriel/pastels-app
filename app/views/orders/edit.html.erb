@@ -1,0 +1,12 @@
+<h2> Updating Your Order </h2>
+<%= simple_form_for @order do |f| %>
+  <%= f.input :quantity%>
+  <%= f.input :order_date %>
+  <%= f.input :review %>
+  <%= f.submit %>
+<% end %>
+
+<%= link_to 'Confirm', order_path(@order), class: 'btn btn-outline-secondary btn-sm' %>
+
+<%=  alert = "Your order has been placed!" %>
+

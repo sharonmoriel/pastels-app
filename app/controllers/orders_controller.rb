@@ -11,7 +11,13 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
 
-    render :new unless @order.save
+    if @order.save
+      redirect_to order_path
+    else
+      render :edit
+    end
+
+    #render :new unless @order.save
   end
 
   def edit
@@ -38,6 +44,6 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:pastel_id, :user_id, :quantity, :order_date, :review)
+    params.require(:order).permit(:pastel_id, :user_id, :quantity, :order_date)
   end
 end
