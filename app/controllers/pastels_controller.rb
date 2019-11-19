@@ -45,10 +45,6 @@ class PastelsController < ApplicationController
   end
 
   def pastel_params
-<<<<<<< HEAD
     params.require(:pastel).permit(:name, :description, :stock, :price, :photo)
-=======
-    params.require(:pastel).permit(:name, :description, :price, :stock, :photo)
->>>>>>> 9613eb4857c9a861729495ba48947a3a293c3caf
   end
 end
