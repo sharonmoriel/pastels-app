@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   resources :pastels
 
-  resources :reviews, only: [:new, :create]
+  # resources :reviews, only: [:new, :create]
 
   resources :orders, except: [:index, :update]
 
