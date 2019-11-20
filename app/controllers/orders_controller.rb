@@ -2,6 +2,7 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy, :review]
 
   def show
+    authorize @order
   end
 
   def new
@@ -12,6 +13,7 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.user = current_user
     @pastel = @order.pastel
+    authorize @order
 
     if @order.quantity > @pastel.stock
       redirect_to pastel_path(@pastel)
@@ -27,11 +29,12 @@ class OrdersController < ApplicationController
   end
 
   def edit
+    authorize @order
   end
 
   def update
     @pastel = @order.pastel
-
+    authorize @order
     if @order.quantity > @pastel.stock
       flash[:alert] = "Not enough stock, please try again"
     elsif @order.update(order_params)
@@ -44,7 +47,7 @@ class OrdersController < ApplicationController
   def destroy
     @order.destroy
 
-    redirect_to order_path(@order.user)
+    redirect_to pastels_path
   end
 
   def review
