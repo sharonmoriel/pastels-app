@@ -13,7 +13,7 @@
     <%= link_to 'Remove', pastel_path(@pastel), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
     <% end %>
     <!-- modal button -->
-    <% if @pastel.stock == 0 %>
+    <% if @pastel.stock <= 0 %>
     <!-- disable order button -->
     <%= link_to new_order_path, {'data-toggle' =>  "modal", 'data-target' => '#orderModalCenter', class: 'btn btn-success disabled'} do %>
     <i class="fas fa-plus mr-1"></i>Order
@@ -63,9 +63,8 @@
         </button>
       </div>
       <div class="modal-body">
-        <%= simple_form_for @order do |f| %>
-        <!-- Waitting for fix -->
-        <%= f.input :quantity, input_html: { min: '0', max: "#{@pastel.stock}" } %>
+        <%= simple_form_for @order, validate: true do |f| %>
+        <%= f.input :quantity, validate: { min: '0', max: "#{@pastel.stock}" } %>
         <%= f.input :order_date %>
         <%= f.input :pastel_id, :as => :hidden, :input_html => { :value => @pastel.id } %>
         <div class="d-flex justify-content-between">

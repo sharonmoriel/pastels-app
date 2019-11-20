@@ -18,6 +18,9 @@ gem 'uglifier'
 gem 'webpacker'
 gem 'cloudinary', '~> 1.9.1'
 gem 'pundit'
+gem 'client_side_validations'
+gem 'client_side_validations-simple_form'
+
 
 group :development do
   gem 'web-console', '>= 3.3.0'
