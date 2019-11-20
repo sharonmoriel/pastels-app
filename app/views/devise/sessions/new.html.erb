@@ -25,4 +25,77 @@
   </div>
 </div>
 
+<!-- New login / signup form -->
+
+<div class="cont">
+
+  <!-- LOGIN -->
+  <div class="form sign-in">
+    <h2>Welcome back,</h2>
+
+    <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="form-inputs">
+      <%= f.input :email,
+      required: false,
+      autofocus: true,
+      input_html: { autocomplete: "email" } %>
+      <%= f.input :password,
+      required: false,
+      input_html: { autocomplete: "current-password" } %>
+      <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+    </div>
+
+    <div class="form-actions submit">
+      <%= f.button :submit, "Log in" %>
+    </div>
+    <% end %>
+    <div class="forgot-pass">
+      <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+        <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+      <% end %>
+    </div>
+
+    <!-- END OF LOGIN -->
+
+  <div class="sub-cont">
+
+    <!-- REGISTER -->
+
+    <div class="img">
+      <div class="img__text m--up">
+        <h2>New here?</h2>
+        <p>Sign up and discover great amount of new opportunities!</p>
+      </div>
+      <div class="img__text m--in">
+        <h2>One of us?</h2>
+        <p>If you already has an account, just sign in. We've missed you!</p>
+      </div>
+      <div class="img__btn">
+        <span class="m--up">Sign Up</span>
+        <span class="m--in">Sign In</span>
+      </div>
+    </div>
+    <div class="form sign-up">
+      <h2>Time to feel like home,</h2>
+      <label>
+        <span>Name</span>
+        <input type="text" />
+      </label>
+      <label>
+        <span>Email</span>
+        <input type="email" />
+      </label>
+      <label>
+        <span>Password</span>
+        <input type="password" />
+      </label>
+      <button type="button" class="submit">Sign Up</button>
+      <button type="button" class="fb-btn">Join with <span>facebook</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- End of new login / signup form -->
+
+
 
