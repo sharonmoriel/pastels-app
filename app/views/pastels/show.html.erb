@@ -1,2 +1,81 @@
-<h1>Pastels#show</h1>
-<p>Find me in app/views/pastels/show.html.erb</p>
+<div class="row justify-content-center">
+  <div class="col-6 text-center">
+    <%= cl_image_tag @pastel.photo, {:size => "360x280", :crop=>"fill"} %>
+    <h2><%= @pastel.name %></h2>
+    <p>Description: <%= @pastel.description %></p>
+    <p>Price: € <%= @pastel.price %></p>
+    <p>Available: <%= @pastel.stock %></p>
+    <% if policy(@pastel).destroy? %>
+    <%= link_to 'Remove', pastel_path(@pastel), method: :delete, class: 'btn btn-danger' %>
+    <% end %>
+    <% if policy(@pastel).edit? %>
+    <%= link_to 'Edit', edit_pastel_path(@pastel), class: 'btn btn-outline-secondary' %>
+    <%= link_to 'Remove', pastel_path(@pastel), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+    <%= link_to 'Edit', edit_pastel_path(@pastel), class: 'btn btn-outline-secondary' %>
+
+    <!-- modal button -->
+    <% if @pastel.stock == 0 %>
+    <!-- disable order button -->
+    <%= link_to new_order_path, {'data-toggle' =>  "modal", 'data-target' => '#orderModalCenter', class: 'btn btn-success disabled'} do %>
+    <i class="fas fa-plus mr-1"></i>Order
+    <% end %>
+    <div class="alert alert-danger alert-dismissible" role="alert">
+      <strong>Holy guacamole!</strong> It looks like we're sold out.
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <% else %>
+      <%= link_to new_order_path, {'data-toggle' =>  "modal", 'data-target' => '#orderModalCenter', class: 'btn btn-success'} do %>
+      <i class="fas fa-plus mr-1"></i>Order
+      <% end %>
+    <% end %>
+  </div>
+</div>
+<hr>
+
+<!-- Reviews  -->
+<div class="row justify-content-center">
+  <div class="col-6 text-center">
+    <h2>Reviews</h2>
+    <% @pastel.orders.each do |order| %>
+    <div class="card-product my-2">
+      <img src="https://kitt.lewagon.com/placeholder/users/papillard" />
+      <div class="card-product-infos">
+        <h2><%= order.user.first_name %></h2>
+        <p><%= order.review %></p>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+
+<hr>
+
+
+<!-- Modal -->
+<div class="modal fade" id="orderModalCenter" tabindex="-1" role="dialog" aria-labelledby="orderModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="orderModalLongTitle">Please confirm quantity and date</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= simple_form_for @order do |f| %>
+        <%= f.input :quantity %>
+        <%= f.input :order_date %>
+        <%= f.input :pastel_id, :as => :hidden, :input_html => { :value => @pastel.id } %>
+        <div class="d-flex justify-content-between">
+          <%= f.submit class: 'btn btn-primary mb-2' %>
+          <%= f.button :button, 'Cancel', :type => 'reset', class: "btn btn-outline-secondary mb-2", data: { toggle: "modal", target: "#orderModalCenter" } =%>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+

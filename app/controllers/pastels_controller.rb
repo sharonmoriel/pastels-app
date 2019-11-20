@@ -2,27 +2,33 @@ class PastelsController < ApplicationController
   before_action :set_pastel, only: [:show, :edit, :update, :destroy]
 
   def index
-    @pastels = Pastel.all
+    @pastels = policy_scope(Pastel)
+  end
+
+  def show
+    @order = Order.new
   end
 
   def new
     @pastel = Pastel.new
+    authorize @pastel
   end
 
   def create
-    @pastel = Pastel.new(pastel_params)
-    @pastel.user = current_user
+    @pastel = current_user.pastels.new(pastel_params)
+    authorize @pastel
 
     if @pastel.save
-      # redirect_to user_path(current_user)
+      redirect_to pastels_path
     else
       render :new
     end
   end
-
+  
   def show
+    authorize @pastel
   end
-
+  
   def edit
   end
 
@@ -35,6 +41,7 @@ class PastelsController < ApplicationController
   end
 
   def destroy
+    authorize @pastel
     @pastel.destroy
   end
 

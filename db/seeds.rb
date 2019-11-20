@@ -2,14 +2,14 @@ require 'faker'
 
 puts 'Creating 3 pastel vendors...'
 3.times do
-  user = User.create(
+  user = User.create!(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     email: Faker::Internet.free_email,
-    encrypted_password: '123456'
+    password: '123456'
   )
 
-  Pastel.create(
+  Pastel.create!(
     name: Faker::BossaNova.song,
     description: Faker::Lorem.sentence,
     price: Faker::Number.decimal(l_digits: 2),
@@ -22,11 +22,11 @@ end
 puts 'Creating 3 users...'
 
 3.times do
-  User.create(
+  User.create!(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     email: Faker::Internet.free_email,
-    encrypted_password: '123456'
+    password: '123456'
   )
 end
 
