@@ -12,18 +12,22 @@
     <%= link_to 'Edit', edit_pastel_path(@pastel), class: 'btn btn-outline-secondary' %>
     <%= link_to 'Remove', pastel_path(@pastel), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
     <% end %>
+
     <!-- modal button -->
+
+    <!-- disable order button (+alert) if stock below 0-->
     <% if @pastel.stock <= 0 %>
-    <!-- disable order button -->
-    <%= link_to new_order_path, {'data-toggle' =>  "modal", 'data-target' => '#orderModalCenter', class: 'btn btn-success disabled'} do %>
-    <i class="fas fa-plus mr-1"></i>Order
-    <% end %>
-    <div class="alert alert-danger alert-dismissible" role="alert">
-      <strong>Holy guacamole!</strong> It looks like we're sold out.
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
+      <%= link_to new_order_path, {'data-toggle' =>  "modal", 'data-target' => '#orderModalCenter', class: 'btn btn-success disabled'} do %>
+      <i class="fas fa-plus mr-1"></i>Order
+      <% end %>
+
+      <div class="alert alert-danger alert-dismissible" role="alert">
+        <strong>Holy guacamole!</strong> It looks like we're sold out.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
     <% else %>
       <%= link_to new_order_path, {'data-toggle' =>  "modal", 'data-target' => '#orderModalCenter', class: 'btn btn-success'} do %>
       <i class="fas fa-plus mr-1"></i>Order
