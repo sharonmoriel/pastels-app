@@ -1,12 +1,13 @@
 <div class="row justify-content-center">
   <div class="col-6 text-center">
-    <%= cl_image_tag(@pastel.photo) %>
+    <%= cl_image_tag @pastel.photo, {:size => "360x280", :crop=>"fill"} %>
     <h2><%= @pastel.name %></h2>
     <p>Description: <%= @pastel.description %></p>
-    <p>Price: <%= @pastel.price %></p>
+    <p>Price: € <%= @pastel.price %></p>
     <p>Available: <%= @pastel.stock %></p>
-    <%= link_to 'Remove', pastel_path(@pastel), method: :delete, class: 'btn btn-danger' %>
+    <%= link_to 'Remove', pastel_path(@pastel), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
     <%= link_to 'Edit', edit_pastel_path(@pastel), class: 'btn btn-outline-secondary' %>
+
     <!-- modal button -->
     <% if @pastel.stock == 0 %>
     <!-- disable order button -->
@@ -20,19 +21,21 @@
       </button>
     </div>
     <% else %>
-    <%= link_to new_order_path, {'data-toggle' =>  "modal", 'data-target' => '#orderModalCenter', class: 'btn btn-success'} do %>
-    <i class="fas fa-plus mr-1"></i>Order
-    <% end %>
+      <%= link_to new_order_path, {'data-toggle' =>  "modal", 'data-target' => '#orderModalCenter', class: 'btn btn-success'} do %>
+      <i class="fas fa-plus mr-1"></i>Order
+      <% end %>
     <% end %>
   </div>
 </div>
 <hr>
+
+<!-- Reviews  -->
 <div class="row justify-content-center">
   <div class="col-6 text-center">
     <h2>Reviews</h2>
     <% @pastel.orders.each do |order| %>
     <div class="card-product my-2">
-      <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+      <img src="https://kitt.lewagon.com/placeholder/users/papillard" />
       <div class="card-product-infos">
         <h2><%= order.user.first_name %></h2>
         <p><%= order.review %></p>
@@ -41,6 +44,9 @@
     <% end %>
   </div>
 </div>
+
+<hr>
+
 
 <!-- Modal -->
 <div class="modal fade" id="orderModalCenter" tabindex="-1" role="dialog" aria-labelledby="orderModalCenterTitle" aria-hidden="true">
