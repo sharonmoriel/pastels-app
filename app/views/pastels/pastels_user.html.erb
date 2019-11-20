@@ -1,0 +1,50 @@
+<% @users_pastel = @pastel.find_by(current_user) %>
+<div class="container">
+  <h1 class="text-center">Welcome to Pastels</h1>
+  <div class="row d-flex justify-content-center">
+    <div class="cards">
+      <% @users_pastels.each do |pastel| %>
+      <div class="card m-2" style="width: 18rem;">
+        <%= link_to pastel, class: 'btn' do %>
+        <img class="card-img-top" src="https://source.unsplash.com/1600x900/?pastel-de-nata" alt="Card image cap">
+        <% end %>
+        <div class="card-body">
+          <!-- <h5 class="card-title"><%= pastel.name %></h5> -->
+          <div class="d-flex justify-content-between">
+            <p class="card-text"><%= pastel.description %></p>
+            <p class="card-text float-right">€ <%= pastel.price %></p>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center m-2">
+          <%= link_to 'Details', pastel, class: 'btn btn-outline-secondary' %>
+          <!-- modal button -->
+          <%= link_to pastel_path(pastel),  {'data-toggle' =>  "modal", 'data-target' => '#orderModalCenter', class: 'btn btn-sm btn-outline-secondary my-0'} do %>
+          <i class="fas fa-plus mr-1"></i>Order me!
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="orderModalCenter" tabindex="-1" role="dialog" aria-labelledby="orderModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="orderModalLongTitle">Here is your order</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        this is an order...
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
