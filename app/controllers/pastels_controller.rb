@@ -6,6 +6,7 @@ class PastelsController < ApplicationController
   end
 
   def show
+    authorize @pastel
     @order = Order.new
   end
 
@@ -24,11 +25,7 @@ class PastelsController < ApplicationController
       render :new
     end
   end
-  
-  def show
-    authorize @pastel
-  end
-  
+
   def edit
   end
 
