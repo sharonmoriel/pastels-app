@@ -5,6 +5,10 @@ class PastelsController < ApplicationController
     @pastels = policy_scope(Pastel)
   end
 
+  def show
+    @order = Order.new
+  end
+
   def new
     @pastel = Pastel.new
     authorize @pastel
@@ -20,11 +24,11 @@ class PastelsController < ApplicationController
       render :new
     end
   end
-
+  
   def show
     authorize @pastel
   end
-
+  
   def edit
   end
 
