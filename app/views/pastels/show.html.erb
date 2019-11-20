@@ -5,9 +5,13 @@
     <p>Description: <%= @pastel.description %></p>
     <p>Price: € <%= @pastel.price %></p>
     <p>Available: <%= @pastel.stock %></p>
-    <%= link_to 'Remove', pastel_path(@pastel), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+    <% if policy(@pastel).destroy? %>
+    <%= link_to 'Remove', pastel_path(@pastel), method: :delete, class: 'btn btn-danger' %>
+    <% end %>
+    <% if policy(@pastel).edit? %>
     <%= link_to 'Edit', edit_pastel_path(@pastel), class: 'btn btn-outline-secondary' %>
-
+    <%= link_to 'Remove', pastel_path(@pastel), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+    <% end %>
     <!-- modal button -->
     <% if @pastel.stock == 0 %>
     <!-- disable order button -->
@@ -53,20 +57,20 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="orderModalLongTitle">Please confirm quantity and date</h5>
+        <h5 class="modal-title" id="orderModalLongTitle">Please confirm quantity and delivery date</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <%= simple_form_for @order do |f| %>
-      <!-- Waitting for fix -->
-        <%= f.input :quantity, input_html: { min:'0', max:"#{@pastel.stock}" }%>
+        <!-- Waitting for fix -->
+        <%= f.input :quantity, input_html: { min: '0', max: "#{@pastel.stock}" } %>
         <%= f.input :order_date %>
         <%= f.input :pastel_id, :as => :hidden, :input_html => { :value => @pastel.id } %>
         <div class="d-flex justify-content-between">
-          <%= f.submit class: 'btn btn-primary mb-2' %>
-          <%= f.button :button, 'Cancel', :type => 'reset', class: "btn btn-outline-secondary mb-2", data: { toggle: "modal", target: "#orderModalCenter" } =%>
+          <%= f.submit class: 'btn btn-primary' %>
+          <%= f.button :button, 'Cancel', :type => 'reset', class: "btn btn-outline-secondary", data: { toggle: "modal", target: "#orderModalCenter" } =%>
         </div>
         <% end %>
       </div>
