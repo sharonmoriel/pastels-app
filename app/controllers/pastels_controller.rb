@@ -2,7 +2,14 @@ class PastelsController < ApplicationController
   before_action :set_pastel, only: [:show, :edit, :update, :destroy]
 
   def index
-    @pastels = Pastel.all
+    pastels_all = Pastel.all
+    pastels_geocoded = Pastel.geocoded
+
+    if pastels_all.count == pastels_geocoded.count
+      @pastels = pastels_geocoded
+    else
+      @pastels = pastels_all
+    end
   end
 
   def new
@@ -45,6 +52,6 @@ class PastelsController < ApplicationController
   end
 
   def pastel_params
-    params.require(:pastel).permit(:name, :description, :price, :stock, :photo)
+    params.require(:pastel).permit(:name, :description, :price, :stock, :photo, :address)
   end
 end
