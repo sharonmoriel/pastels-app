@@ -20,10 +20,11 @@
       <div class="text-center">
         <%= link_to 'Delete Order', order_path(@order), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %>
         <%= link_to 'Update Order', edit_order_path(@order), class: 'btn btn-outline-secondary btn-sm' %>
+        <% disabled_button = @order.review.nil? ? "" : "disabled" %>
         <% if DateTime.now > @order.order_date %>
-        <%= link_to 'Review', review_order_path(@order), {'data-toggle' =>  "modal", 'data-target' => '#reviewModalCenter', class: 'btn btn-sm btn-success', id: "reviewButton"} %>
+        <%= link_to 'Review', review_order_path(@order), {'data-toggle' =>  "modal", 'data-target' => '#reviewModalCenter', class: "btn btn-sm btn-success #{disabled_button}", id: "reviewButton"} %>
         <% else %>
-        <%= link_to 'Review', review_order_path(@order), {'data-toggle' =>  "modal", 'data-target' => '#reviewModalCenter', class: 'btn btn-sm btn-success disabled'} %>
+        <%= link_to 'Review', review_order_path(@order), {'data-toggle' =>  "modal", 'data-target' => '#reviewModalCenter', class: 'btn btn-light disabled'} %>
         <% end %>
       </div>
     </div>

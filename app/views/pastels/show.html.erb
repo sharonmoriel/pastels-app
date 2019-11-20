@@ -64,6 +64,7 @@
       </div>
       <div class="modal-body">
         <%= simple_form_for @order do |f| %>
+        <!-- Waitting for fix -->
         <%= f.input :quantity, input_html: { min: '0', max: "#{@pastel.stock}" } %>
         <%= f.input :order_date %>
         <%= f.input :pastel_id, :as => :hidden, :input_html => { :value => @pastel.id } %>
@@ -76,5 +77,4 @@
     </div>
   </div>
 </div>
-
 
