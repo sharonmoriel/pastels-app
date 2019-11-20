@@ -2,16 +2,14 @@ class PastelsController < ApplicationController
   before_action :set_pastel, only: [:show, :edit, :update, :destroy]
 
   def index
-
-    pastels_all = Pastel.all
-    pastels_geocoded = Pastel.geocoded
-
-    if pastels_all.count == pastels_geocoded.count
-      @pastels = pastels_geocoded
-    else
-      @pastels = pastels_all
-    end
+    @pastels = Pastel.geocoded
     @pastels = policy_scope(Pastel)
+    @markers = @pastels.map do |pastel|
+      {
+        lat: pastel.latitude,
+        lng: pastel.longitude
+      }
+    end
   end
 
   def show
@@ -25,7 +23,8 @@ class PastelsController < ApplicationController
   end
 
   def create
-    @pastel = current_user.pastels.new(pastel_params)
+    @pastel = Pastel.new(pastel_params)
+    @pastel.user = current_user
     authorize @pastel
 
     if @pastel.save
