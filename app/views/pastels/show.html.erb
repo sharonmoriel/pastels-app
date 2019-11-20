@@ -5,7 +5,11 @@
     <p>Description: <%= @pastel.description %></p>
     <p>Price: <%= @pastel.price %></p>
     <p>Available: <%= @pastel.stock %></p>
+    <% if policy(@pastel).destroy? %>
     <%= link_to 'Remove', pastel_path(@pastel), method: :delete, class: 'btn btn-danger' %>
+    <% end %>
+    <% if policy(@pastel).edit? %>
     <%= link_to 'Edit', edit_pastel_path(@pastel), class: 'btn btn-outline-secondary' %>
+    <% end %>
   </div>
 </div>
