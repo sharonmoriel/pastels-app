@@ -45,8 +45,8 @@ class OrdersController < ApplicationController
   end
 
   def destroy
+    authorize @order
     @order.destroy
-
     redirect_to pastels_path
   end
 
