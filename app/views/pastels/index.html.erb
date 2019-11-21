@@ -5,11 +5,13 @@
   </div>
 </div>
 
-<div class="container">
-  <div class="row d-flex justify-content-center">
+<div class="main-container">
+  <div class="pastel-section col-8">
+    <h1 class="text-center">Find your next Pastel</h1>
+    <div class="row d-flex justify-content-center card-section">
     <div class="cards">
       <% @pastels.each do |pastel| %>
-      <div class="card m-2" style="width: 18rem;">
+      <div class="card m-2">
         <%= link_to pastel, class: 'btn' do %>
         <%= cl_image_tag pastel.photo, class: 'card-img-top' %>
         <% end %>
@@ -26,11 +28,10 @@
       </div>
       <% end %>
     </div>
+    </div>
   </div>
   <div
-  id="map"
-  style="width: 100%;
-  height: 600px;"
+  id="map" class="col-4"
   data-markers="<%= @markers.to_json %>"
   data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
 ></div>
