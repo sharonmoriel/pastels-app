@@ -12,3 +12,10 @@ import { initMapbox } from '../plugins/mapbox.js';
 
 initMapbox();
 
+$('#query').focus(function()
+{
+    $(this).animate({ width: '+=100' }, 'slow');
+}).blur(function()
+{
+    $(this).animate({ width: '-=50' }, 'slow');
+});
