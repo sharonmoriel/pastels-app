@@ -11,14 +11,17 @@
   width: 40px;
 }
 
+$transitionSpeed: 0.8s;
+
 .fix {
-    padding: 0;
+    // padding: 0;
     background-color: $gray;
     position: fixed; /* Set the navbar to fixed position */
     top: 0; /* Position the navbar at the top of the page */
     width: 100%; /* Full width */
     height: 54px;
     z-index: 100;
+    transition: $transitionSpeed;
 }
 
 
