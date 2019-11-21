@@ -20,37 +20,73 @@
           <%= cl_image_tag pastel.photo, class: 'card-img-top' %>
           <% end %>
 
+          <!-- Review Modal button -->
+          <span>
+            <button type="button" class="badge badge-primary btn-review" data-toggle="modal" data-target="#reviewModalCenter">
+            <i class="fas fa-comments"></i></button>
+          </span>
+
+          <!-- End of Review Modal Button -->
+
+          <!-- Review Modal -->
+
+          <div class="modal fade" id="reviewModalCenter" tabindex="-1" role="dialog" aria-labelledby="reviewModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="reviewModalLongTitle"><%= pastel.name %> Reviews</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <% pastel.orders.each do |order| %>
+                    <div class="card-product">
+                      <i class="fas fa-quote-left"></i>
+                      <i class="fas fa-quote-right"></i>
+
+                      <img class="avatar ml-2" src="https://kitt.lewagon.com/placeholder/users/papillard" />
+
+                      <div>
+                        <h2 class="text-muted ml-4"><%= order.review %></h2>
+
+                        <p class="ml-4 mb-0">-<em><%= order.user.first_name %></em>-</p>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- End of Review Modal -->
+
           <div class="card-body">
             <h5 class="card-title"><%= pastel.name %></h5>
             <p class="card-text"><%= pastel.description %></p>
             <p class="card-text"><%= pastel.stock %> pastels available</p>
           </div>
+
           <div class="d-flex justify-content-between align-items-center m-2">
 
-            <!-- modal button -->
+            <!-- Order modal button -->
 
-            <!-- disable order button (+alert) if stock below 0-->
+            <!-- disable order button if stock below 0-->
             <% if pastel.stock <= 0 %>
-            <%= link_to new_order_path, {'data-toggle' =>  "modal", 'data-target' => '#orderModalCenter', class: 'btn btn-success disabled'} do %>
-            <i class="fas fa-plus mr-1"></i>Order
-            <% end %>
-
-            <div class="alert alert-danger alert-dismissible" role="alert">
-              <strong>Holy guacamole!</strong> It looks like we're sold out.
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
+              <%= link_to new_order_path, {'data-toggle' =>  "modal", 'data-target' => "#orderModalCenter-#{pastel.id}", class: 'btn btn-success disabled'} do %>
+              <i class="fas fa-plus mr-1"></i>Order
+              <% end %>
 
             <% else %>
-            <%= link_to new_order_path, {'data-toggle' =>  "modal", 'data-target' => '#orderModalCenter', class: 'btn btn-success'} do %>
-            <i class="fas fa-plus mr-1"></i>Order
+              <%= link_to new_order_path, {'data-toggle' =>  "modal", 'data-target' => "#orderModalCenter-#{pastel.id}", class: 'btn btn-success'} do %>
+              <i class="fas fa-plus mr-1"></i>Order
+              <% end %>
             <% end %>
-            <% end %>
-            <!-- End of modal button -->
+
+            <!-- End of Order modal button -->
 
             <!-- Order Modal -->
-            <div class="modal fade" id="orderModalCenter" tabindex="-1" role="dialog" aria-labelledby="orderModalCenterTitle" aria-hidden="true">
+            <div class="modal fade" id="orderModalCenter-<%= pastel.id %>" tabindex="-1" role="dialog" aria-labelledby="orderModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -60,10 +96,11 @@
                     </button>
                   </div>
                   <div class="modal-body">
+
                     <%= simple_form_for @order, validate: true do |f| %>
                     <%= f.input :quantity, validate: { min: '0', max: "#{pastel.stock}" } %>
                     <%= f.input :order_date %>
-                    <%= f.input :pastel_id, :as => :hidden, :input_html => { :value => pastel.id } %>
+                    <%= f.input :pastel_id, as: :hidden, :input_html => { value: pastel.id } %>
                     <div class="d-flex justify-content-between">
                       <%= f.submit class: 'btn btn-primary' %>
                       <%= f.button :button, 'Cancel', :type => 'reset', class: "btn btn-outline-secondary", data: { toggle: "modal", target: "#orderModalCenter" } =%>

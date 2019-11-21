@@ -4,3 +4,11 @@
   font-weight: lighter;
   transition: opacity 0.3s ease;
 }
+
+.btn-review {
+  position: absolute;
+  top: 200px;
+  right: -18px;
+  z-index: 80;
+  font-size: 15px;
+}
