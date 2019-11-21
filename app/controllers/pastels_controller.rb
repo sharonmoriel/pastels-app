@@ -2,7 +2,14 @@ class PastelsController < ApplicationController
   before_action :set_pastel, only: [:show, :edit, :update, :destroy]
 
   def index
+    @pastels = Pastel.geocoded
     @pastels = policy_scope(Pastel)
+    @markers = @pastels.map do |pastel|
+      {
+        lat: pastel.latitude,
+        lng: pastel.longitude
+      }
+    end
   end
 
   def show
@@ -16,7 +23,8 @@ class PastelsController < ApplicationController
   end
 
   def create
-    @pastel = current_user.pastels.new(pastel_params)
+    @pastel = Pastel.new(pastel_params)
+    @pastel.user = current_user
     authorize @pastel
 
     if @pastel.save
@@ -49,6 +57,6 @@ class PastelsController < ApplicationController
   end
 
   def pastel_params
-    params.require(:pastel).permit(:name, :description, :price, :stock, :photo)
+    params.require(:pastel).permit(:name, :description, :price, :stock, :photo, :address)
   end
 end
