@@ -1,4 +1,10 @@
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
 .card-shadow {
+  position: relative;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
   &:hover {
@@ -7,6 +13,7 @@
 }
 
 .cards {
+  background-color: white;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 16px;
@@ -14,6 +21,7 @@
 }
 
 .card-product {
+  position: relative;
   overflow: hidden;
   height: 120px;
   background: white;
@@ -22,14 +30,32 @@
   align-items: center;
 }
 
+.card-product i {
+  opacity: 0.1;
+  position: absolute;
+  font-size: 47px;
+}
+
+.fa-quote-left {
+  top: 4px;
+  left: 94px;
+}
+
+.fa-quote-right {
+  bottom: 4px;
+  right: 22px;
+}
+
 .card-product img {
-  height: 100%;
-  width: 120px;
+  height: 80px;
+  width: 80px;
   object-fit: cover;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  cursor: default;
 }
 
 .card-product h2 {
-  font-size: 16px;
+  font-size: 24px;
   font-weight: bold;
   margin: 0;
 }
@@ -42,9 +68,10 @@
   margin-top: 8px;
 }
 
-.card-product .card-product-infos {
-  padding: 16px;
-}
+// .card-product .card-product-infos {
+//   padding: 16px;
+
+// }
 
 
 // Smallest device

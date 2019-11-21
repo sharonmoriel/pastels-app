@@ -3,8 +3,8 @@ class PastelsController < ApplicationController
 
   def index
     @order = Order.new
-    @pastels = Pastel.geocoded
     @pastels = policy_scope(Pastel)
+    @pastels = Pastel.geocoded
     @markers = @pastels.map do |pastel|
       {
         lat: pastel.latitude,

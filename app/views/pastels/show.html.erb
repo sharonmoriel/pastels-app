@@ -20,13 +20,6 @@
       <i class="fas fa-plus mr-1"></i>Order
       <% end %>
 
-      <div class="alert alert-danger alert-dismissible" role="alert">
-        <strong>Holy guacamole!</strong> It looks like we're sold out.
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-
     <% else %>
       <%= link_to new_order_path, {'data-toggle' =>  "modal", 'data-target' => '#orderModalCenter', class: 'btn btn-success'} do %>
       <i class="fas fa-plus mr-1"></i>Order
@@ -78,28 +71,5 @@
 <hr>
 
 
-<!-- Modal -->
-<div class="modal fade" id="orderModalCenter" tabindex="-1" role="dialog" aria-labelledby="orderModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="orderModalLongTitle">Please confirm quantity and delivery date</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <%= simple_form_for @order, validate: true do |f| %>
-        <%= f.input :quantity, validate: { min: '0', max: "#{@pastel.stock}" } %>
-        <%= f.input :order_date %>
-        <%= f.input :pastel_id, :as => :hidden, :input_html => { :value => @pastel.id } %>
-        <div class="d-flex justify-content-between">
-          <%= f.submit class: 'btn btn-primary' %>
-          <%= f.button :button, 'Cancel', :type => 'reset', class: "btn btn-outline-secondary", data: { toggle: "modal", target: "#orderModalCenter" } =%>
-        </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
+
 

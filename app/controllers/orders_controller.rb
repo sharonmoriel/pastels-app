@@ -21,7 +21,7 @@ class OrdersController < ApplicationController
     elsif @order.save
       @pastel.stock -= @order.quantity
       @pastel.save!
-      redirect_to order_path(@order)
+      redirect_to user_path(current_user)
     else
       render :new
       # needs to be changed when we have a pastel show page
