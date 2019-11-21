@@ -7,6 +7,11 @@
 
 <div class="main-container">
   <div class="pastel-section col-8">
+    <% if params[:query].present? %>
+    <h1 class="text-center">Search Results</h1>
+    <% else %>
+    <h1 class="text-center">Find your next Pastel</h1>
+    <% end %>
     <div class="row d-flex justify-content-center card-section">
       <div class="cards">
         <% @pastels.each do |pastel| %>

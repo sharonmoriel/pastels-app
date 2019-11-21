@@ -5,6 +5,9 @@ class PastelsController < ApplicationController
     @order = Order.new
     @pastels = Pastel.geocoded
     @pastels = policy_scope(Pastel)
+    if params[:query].present?
+      @pastels = Pastel.search_by_name_address_description(params[:query])
+    end
     @markers = @pastels.map do |pastel|
       {
         lat: pastel.latitude,
