@@ -7,11 +7,12 @@
 
 <div class="main-container">
   <div class="pastel-section col-8">
+
+    <!-- Search -->
     <% if params[:query].present? %>
-    <h1 class="text-center">Search Results</h1>
-    <% else %>
-    <h1 class="text-center">Find your next Pastel</h1>
+      <h1 class="text-center">Search Results</h1>
     <% end %>
+
     <div class="row d-flex justify-content-center card-section">
       <div class="cards">
         <% @pastels.each do |pastel| %>
@@ -99,11 +100,11 @@
 
                     <%= simple_form_for @order, validate: true do |f| %>
                     <%= f.input :quantity, validate: { min: '0', max: "#{pastel.stock}" } %>
-                    <%= f.input :order_date %>
+                    <%= f.input :order_date, :input_html => { id: 'flatpickr-input'} %>
                     <%= f.input :pastel_id, as: :hidden, :input_html => { value: pastel.id } %>
                     <div class="d-flex justify-content-between">
                       <%= f.submit class: 'btn btn-primary' %>
-                      <%= f.button :button, 'Cancel', :type => 'reset', class: "btn btn-outline-secondary", data: { toggle: "modal", target: "#orderModalCenter" } =%>
+                      <%= f.button :button, 'Cancel', :type => 'reset', class: "btn btn-outline-secondary", data: { toggle: "modal", target: "orderModalCenter-#{pastel.id}" } %>
                     </div>
                     <% end %>
                   </div>

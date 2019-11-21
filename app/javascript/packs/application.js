@@ -6,15 +6,17 @@ import { initMapbox } from '../plugins/mapbox.js';
 
 initMapbox();
 
-
-document.querySelector('.img__btn').addEventListener('click', function() {
-  document.querySelector('.cont').classList.toggle('s--signup');
+// document.querySelector('.img__btn').addEventListener('click', function() {
+//   document.querySelector('.cont').classList.toggle('s--signup');
 
 $('#query').focus(function()
 {
-    $(this).animate({ width: '+=100' }, 'slow');
+  $(this).animate({ width: '+=100' }, 'slow');
 }).blur(function()
 {
-    $(this).animate({ width: '-=50' }, 'slow');
+  $(this).animate({ width: '-=50' }, 'slow');
+});
 
+$(document).ready(function(){
+    flatpickr('#flatpickr-input');
 });
