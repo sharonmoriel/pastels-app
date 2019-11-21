@@ -2,6 +2,7 @@ class PastelsController < ApplicationController
   before_action :set_pastel, only: [:show, :edit, :update, :destroy]
 
   def index
+    @order = Order.new
     @pastels = Pastel.geocoded
     @pastels = policy_scope(Pastel)
     if params[:query].present?

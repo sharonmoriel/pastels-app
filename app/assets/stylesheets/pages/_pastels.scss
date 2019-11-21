@@ -13,12 +13,9 @@
 }
 
 #map {
-  height: calc(100vh - 72px);
+  height: calc(100vh - 54px);
   width: 500px;
   position: sticky;
-  top: 72px;
+  top: 54px;
 }
 
-.cards {
-  flex-grow: 1
-}
