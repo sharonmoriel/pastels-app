@@ -35,9 +35,11 @@ class PastelsController < ApplicationController
   end
 
   def edit
+    authorize @pastel
   end
 
   def update
+    authorize @pastel
     if @pastel.update(pastel_params)
       redirect_to pastel_path(@pastel)
     else
