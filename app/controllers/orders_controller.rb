@@ -15,7 +15,6 @@ class OrdersController < ApplicationController
     @pastel = @order.pastel
     authorize @order
 
-
     if @order.quantity > @pastel.stock
       redirect_to pastel_path(@pastel)
       flash[:alert] = "Not enough stock"
@@ -48,7 +47,7 @@ class OrdersController < ApplicationController
   def destroy
     @order.destroy
 
-    redirect_to order_path(@order.user)
+    redirect_to pastels_path
   end
 
   def review

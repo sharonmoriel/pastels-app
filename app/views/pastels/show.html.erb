@@ -6,11 +6,10 @@
     <p>Price: € <%= @pastel.price %></p>
     <p>Available: <%= @pastel.stock %></p>
     <% if policy(@pastel).destroy? %>
-    <%= link_to 'Remove', pastel_path(@pastel), method: :delete, class: 'btn btn-danger' %>
+    <%= link_to 'Remove', pastel_path(@pastel), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
     <% end %>
     <% if policy(@pastel).edit? %>
     <%= link_to 'Edit', edit_pastel_path(@pastel), class: 'btn btn-outline-secondary' %>
-    <%= link_to 'Remove', pastel_path(@pastel), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
     <% end %>
 
     <!-- modal button -->
@@ -39,19 +38,42 @@
 
 <!-- Reviews  -->
 <div class="row justify-content-center">
-  <div class="col-6 text-center">
-    <h2>Reviews</h2>
-    <% @pastel.orders.each do |order| %>
-    <div class="card-product my-2">
-      <img src="https://kitt.lewagon.com/placeholder/users/papillard" />
-      <div class="card-product-infos">
-        <h2><%= order.user.first_name %></h2>
-        <p><%= order.review %></p>
+
+
+
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <% @pastel.orders.each_with_index do |order, index| %>
+      <li data-target="#carouselExampleIndicators" data-slide-to="<%= index %>" class="<%= index == 0 ? "active" : "" %>"></li>
+    <% end %>
+  </ol>
+  <div class="carousel-inner">
+
+
+  <% @pastel.orders.each_with_index do |order, index| %>
+    <div class="carousel-item <%= index == 0 ? "active" : "" %>">
+      <img class="d-block " src="https://kitt.lewagon.com/placeholder/users/papillard" alt="NO PASTEL PHOTO">
+      <div class="carousel-caption d-none d-md-block">
+        <h2> "<em> <%= order.review %> </em> "</h2>
+        <p> ---- <%= order.user.first_name %> ----</p>
       </div>
     </div>
-    <% end %>
+  <% end %>
+
+
+
   </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
 </div>
+</div>
+
 
 <hr>
 

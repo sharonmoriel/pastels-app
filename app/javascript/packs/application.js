@@ -11,3 +11,4 @@ import { initMapbox } from '../plugins/mapbox.js';
 
 
 initMapbox();
+
