@@ -2,16 +2,16 @@ require 'faker'
 
 puts 'Creating 3 pastel vendors...'
 
-Pastel.delete_all
+Order.destroy_all
+Pastel.destroy_all
 
 addresses = [
               "R. da Misericórdia 9, Lisbon",
-              "Largo do Intendente Pina Manique 45",
-              "Tv. do Monte 26",
-              "Rua dos Bacalhoeiros, 10",
-              "Praça do Príncipe Real 5",
+              "Largo do Intendente Pina Manique 45, Lisbon",
+              "Rua dos Bacalhoeiros 10, Lisbon",
+              "Praça do Príncipe Real 5, Lisbon",
               "Rua Doutor Gama Barros 14, Lisbon",
-              "Av. 24 de Julho 68"
+              "Av. 24 de Julho 68, Lisbon"
           ]
 
 
