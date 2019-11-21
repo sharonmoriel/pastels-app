@@ -1,6 +1,8 @@
+
 .navbar-lewagon {
   justify-content: space-between;
-  background: #D9C2AD;
+  // background: #D9C2AD; //old color;
+  background: $gray;
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -22,6 +24,13 @@ $transitionSpeed: 0.8s;
     height: 54px;
     z-index: 100;
     transition: $transitionSpeed;
+}
+
+
+
+#query {
+  width: 350px;
+  display: inline-block;
 }
 
 
