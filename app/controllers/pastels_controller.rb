@@ -14,7 +14,8 @@ class PastelsController < ApplicationController
     @markers = @pastels.map do |pastel|
       {
         lat: pastel.latitude,
-        lng: pastel.longitude
+        lng: pastel.longitude,
+        infoWindow: render_to_string(partial: "info_window", locals: { pastel: pastel })
       }
     end
   end
