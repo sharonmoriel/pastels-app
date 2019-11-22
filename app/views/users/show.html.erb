@@ -23,7 +23,7 @@
     <div class="card-header" id="headingTwo">
       <h2 class="mb-0">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          <i class="fas fa-caret-down"></i> My orders
+          <i class="fas fa-caret-down"></i> Orders placed
         </button>
       </h2>
     </div>
@@ -54,7 +54,7 @@
     <div class="card-header" id="headingThree">
       <h2 class="mb-0">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-          <i class="fas fa-caret-down"></i> Orders to me
+          <i class="fas fa-caret-down"></i> Orders received
         </button>
       </h2>
     </div>
@@ -73,7 +73,6 @@
                   <label>Price:</label> <%= order.pastel.price %><br>
                   <label>Buyer:</label> <%= order.user.first_name %> <%= order.user.last_name %><br>
                 </p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
               </div>
             </div>
             <br>
@@ -95,36 +94,69 @@
     <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
       <div class="card-body">
         <%= link_to "Add a pastel", new_pastel_path, class: "btn btn-primary" %>
-        <!-- old -->
-        <div class="container">
-          <h1 class="text-center">My Pastels</h1>
-          <div class="row d-flex justify-content-center">
-            <div class="cards">
-              <% @my_pastels.each do |pastel| %>
-              <div class="card m-2" style="width: 18rem;">
-                <%= link_to pastel, class: 'btn' do %>
-                <img class="card-img-top" src="https://source.unsplash.com/1600x900/?pastel-de-nata" alt="Card image cap">
-                <% end %>
-                <div class="card-body">
-                  <!-- <h5 class="card-title"><%= pastel.name %></h5> -->
-                  <div class="d-flex justify-content-between">
-                    <p class="card-text"><%= pastel.description %></p>
-                    <p class="card-text float-right">€ <%= pastel.price %></p>
+        <div class="row d-flex justify-content-center card-section">
+          <div class="cards bg-white">
+            <% @my_pastels.each do |pastel| %>
+            <div class="card card-shadow m-2" style="max-width: 18rem;">
+              <%= link_to pastel, class: 'btn' do %>
+              <%= cl_image_tag pastel.photo, class: 'card-img-top' %>
+              <% end %>
+
+              <!-- Review Modal button -->
+              <span>
+                <button type="button" class="badge badge-primary btn-review" data-toggle="modal" data-target="#reviewModalCenter-<%= pastel.id %>">
+                <i class="fas fa-comments"></i> <p> Reviews! </p></button>
+              </span>
+
+              <!-- End of Review Modal Button -->
+
+              <!-- Review Modal -->
+
+              <div class="modal fade" id="reviewModalCenter-<%= pastel.id %>" tabindex="-1" role="dialog" aria-labelledby="reviewModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="reviewModalLongTitle"><%= pastel.name %> Reviews</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <% pastel.orders.each do |order| %>
+                        <div class="card-product">
+                          <i class="fas fa-quote-left"></i>
+                          <i class="fas fa-quote-right"></i>
+
+                          <img class="avatar ml-2" src="https://kitt.lewagon.com/placeholder/users/papillard" />
+
+                          <div>
+                            <h2 class="text-muted ml-4"><%= order.review %></h2>
+
+                            <p class="ml-4 mb-0">-<em><%= order.user.first_name %></em>-</p>
+                          </div>
+                        </div>
+                      <% end %>
+                    </div>
                   </div>
                 </div>
-                <div class="d-flex justify-content-between align-items-center m-2">
-                  <%= link_to 'Details', pastel, class: 'btn btn-outline-secondary' %>
-                  <!-- modal button -->
-                  <%= link_to pastel_path(pastel),  {'data-toggle' =>  "modal", 'data-target' => '#orderModalCenter', class: 'btn btn-sm btn-outline-secondary my-0'} do %>
-                  <i class="fas fa-plus mr-1"></i>Order me!
-                  <% end %>
-                </div>
               </div>
-            <% end %>
+
+              <!-- End of Review Modal -->
+
+              <div class="card-body">
+                <h5 class="card-title"><%= pastel.name %></h5>
+                <p class="card-text"><%= pastel.description %></p>
+                <p class="card-text"><%= pastel.stock %> pastels available</p>
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center m-2">
+                <p></p>
+                <p class="card-text float-right">€ <%= pastel.price %></p>
+              </div>
             </div>
+            <% end %>
           </div>
         </div>
-
       </div>
     </div>
   </div>
