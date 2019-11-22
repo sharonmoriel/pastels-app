@@ -1,5 +1,6 @@
 class PastelsController < ApplicationController
   before_action :set_pastel, only: [:show, :edit, :update, :destroy]
+  skip_before_action :authenticate_user!, only: %i[index]
 
   def index
     @order = Order.new
