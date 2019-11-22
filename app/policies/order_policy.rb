@@ -13,6 +13,10 @@ class OrderPolicy < ApplicationPolicy
     true  # Anyone can create a restaurant
   end
 
+  def new?
+    true
+  end
+
   def update?
     record.user == user  # Only restaurant creator can update it
   end

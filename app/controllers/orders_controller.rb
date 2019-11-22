@@ -6,7 +6,8 @@ class OrdersController < ApplicationController
   end
 
   def new
-    @orders = Order.new
+    @order = Order.new
+     authorize @order
   end
 
   def create
