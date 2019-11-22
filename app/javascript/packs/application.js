@@ -3,8 +3,8 @@ import '@client-side-validations/client-side-validations';
 import '@client-side-validations/simple-form/dist/simple-form.bootstrap4';
 import 'mapbox-gl/dist/mapbox-gl.css'; // <-- you need to uncomment the stylesheet_pack_tag in the layout!
 import { initMapbox } from '../plugins/mapbox.js';
+import flatpickr from "flatpickr";
 
-// const flatpickr = require("flatpickr");
 
 initMapbox();
 
@@ -30,11 +30,17 @@ if(searchQuery !== null) {
   });
 }
 
-// const datePicker = document.querySelector('#flatpickr-input')
+const datePickers = document.querySelectorAll('.flatpickr-input')
 
-// if(datePicker !== null) {
-//   flatpickr(datePicker, {});
-// }
+datePickers.forEach(element => {
+  flatpickr(element, {
+    altInput: true,
+    altFormat: "F j, Y",
+    dateFormat: "Y-m-d",
+  });
+});
+
+
 
 
 
