@@ -42,20 +42,19 @@
                   <label>Price:</label> <%= order.pastel.price %><br>
                 </p>
                 <a href="#" class="btn btn-primary">Go somewhere</a>
+                <%= link_to "Delete", order_path(order.id), method: :delete, confirm: "Positive?", title: "Delete" %>
               </div>
             </div>
             <br>
           <% end %>
-
-
       </div>
     </div>
   </div>
 
   <div class="card">
-    <div class="card-header" id="headingThee">
+    <div class="card-header" id="headingThree">
       <h2 class="mb-0">
-        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseThree">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
           <i class="fas fa-caret-down"></i> Orders to me
         </button>
       </h2>
@@ -66,7 +65,7 @@
           <% @orders_to_me.each do |order| %>
 
             <div class="card">
-              <h5 class="card-header">(to me) Order #<%= order.id %></h5>
+              <h5 class="card-header">Order #<%= order.id %></h5>
               <div class="card-body">
                 <h5 class="card-title">Pastel: <%= order.pastel.name%></h5>
                 <p class="card-text">
@@ -89,7 +88,7 @@
   <div class="card">
     <div class="card-header" id="headingFour">
       <h2 class="mb-0">
-        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
           <i class="fas fa-caret-down"></i> Pastels
         </button>
       </h2>
