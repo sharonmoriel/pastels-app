@@ -16,5 +16,4 @@ class Pastel < ApplicationRecord
   validates :description, presence: true
   validates :price, presence: true
   validates :stock, presence: true
-  validates :photo, presence: true
 end

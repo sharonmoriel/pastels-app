@@ -39,7 +39,7 @@ class OrdersController < ApplicationController
     if @order.quantity > @pastel.stock
       flash[:alert] = "Not enough stock, please try again"
     elsif @order.update(order_params)
-      redirect_to order_path(@order)
+      redirect_to user_path(current_user)
     else
       render :edit # print edit.html.erb
     end
@@ -48,10 +48,11 @@ class OrdersController < ApplicationController
   def destroy
     authorize @order
     @order.destroy
-    redirect_to user_path
+    redirect_to user_path(current_user)
   end
 
   def review
+    authorize @order
   end
 
   private
