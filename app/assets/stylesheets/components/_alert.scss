@@ -1,6 +1,9 @@
 .alert {
-  position: fixed;
-  bottom: 16px;
-  right: 16px;
-  z-index: 1000;
+text-align: center;
+}
+
+.alert-warning {
+    color: white;
+    background-color: red ;
+    border-color: #efd2b8;
 }
