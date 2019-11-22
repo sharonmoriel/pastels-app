@@ -22,6 +22,8 @@ gem 'pundit'
 gem 'client_side_validations'
 gem 'client_side_validations-simple_form'
 gem 'pg_search', '~> 2.3.0'
+gem 'flatpickr_rails'
+
 
 
 group :development do
