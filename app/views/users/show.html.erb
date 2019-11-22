@@ -52,6 +52,7 @@
                 <% else %>
                   <%= link_to 'Review', review_order_path(order), {'data-toggle' =>  "modal", 'data-target' => "#addReviewModalCenter-#{order.id}", class: 'btn btn-light disabled'} %>
                 <% end %>
+
               </div>
             </div>
 
@@ -71,7 +72,7 @@
                       <%= f.input :review %>
                       <div class="d-flex justify-content-between">
                         <%= f.button :submit, "Add a review", class: 'btn btn-success', id: '#reviewSubmitButton' %>
-                        <%= f.button :button, 'Cancel', :type => 'reset', class: "btn btn-outline-secondary mb-2", data: { dismiss: "modal", target: "#addReviewModalCenter" } =%>
+                        <%= f.button :button, 'Cancel', :type => 'reset', class: "btn btn-outline-secondary mb-2", data: { dismiss: "modal", target: "#addReviewModalCenter-#{order.id}" } =%>
                       </div>
                       <% end %>
                     </div>
