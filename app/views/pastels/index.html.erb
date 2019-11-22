@@ -24,7 +24,7 @@
           <!-- Review Modal button -->
           <span>
             <button type="button" class="badge badge-primary btn-review" data-toggle="modal" data-target="#reviewModalCenter-<%= pastel.id %>">
-            <i class="fas fa-comments"></i></button>
+            <i class="fas fa-comments"></i> <p> Reviews! </p></button>
           </span>
 
           <!-- End of Review Modal Button -->
@@ -100,7 +100,7 @@
 
                     <%= simple_form_for @order, validate: true do |f| %>
                     <%= f.input :quantity, validate: { min: '0', max: "#{pastel.stock}" } %>
-                    <%= f.input :order_date, :input_html => { id: 'flatpickr-input'} %>
+                    <%= f.input :order_date, as: :string, input_html: { class: 'flatpickr-input'} %>
                     <%= f.input :pastel_id, as: :hidden, :input_html => { value: pastel.id } %>
                     <div class="d-flex justify-content-between">
                       <%= f.submit class: 'btn btn-primary' %>

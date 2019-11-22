@@ -1,5 +1,6 @@
 class PastelsController < ApplicationController
   before_action :set_pastel, only: [:show, :edit, :update, :destroy]
+  skip_before_action :authenticate_user!, only: %i[index]
 
   def index
     @order = Order.new
@@ -14,7 +15,8 @@ class PastelsController < ApplicationController
     @markers = @pastels.map do |pastel|
       {
         lat: pastel.latitude,
-        lng: pastel.longitude
+        lng: pastel.longitude,
+        infoWindow: render_to_string(partial: "info_window", locals: { pastel: pastel })
       }
     end
   end
