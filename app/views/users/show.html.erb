@@ -48,9 +48,9 @@
 
                 <% disabled_button = order.review.nil? ? "" : "disabled" %>
                 <% if DateTime.now > order.order_date %>
-                  <%= link_to 'Review', review_order_path(order), {'data-toggle' =>  "modal", 'data-target' => "#addReviewModalCenter-#{order.id}", class: "btn btn-success #{disabled_button}", id: "reviewButton"} %>
+                  <%= link_to 'Review', review_order_path(order), {'data-toggle' =>  "modal", 'data-target' => "#addReviewModalCenter#{order.id}", class: "btn btn-success #{disabled_button}", id: "reviewButton"} %>
                 <% else %>
-                  <%= link_to 'Review', review_order_path(order), {'data-toggle' =>  "modal", 'data-target' => "#addReviewModalCenter-#{order.id}", class: 'btn btn-light disabled'} %>
+                  <%= link_to 'Review', review_order_path(order), {'data-toggle' =>  "modal", 'data-target' => "#addReviewModalCenter#{order.id}", class: 'btn btn-light disabled'} %>
                 <% end %>
 
               </div>
@@ -72,7 +72,7 @@
                       <%= f.input :review %>
                       <div class="d-flex justify-content-between">
                         <%= f.button :submit, "Add a review", class: 'btn btn-success', id: '#reviewSubmitButton' %>
-                        <%= f.button :button, 'Cancel', :type => 'reset', class: "btn btn-outline-secondary mb-2", data: { dismiss: "modal", target: "#addReviewModalCenter-#{order.id}" } =%>
+                        <%= f.button :button, 'Cancel', :type => 'reset', class: "btn btn-outline-secondary mb-2", data: { dismiss: "modal", target: "#addReviewModalCenter#{order.id}" } =%>
                       </div>
                       <% end %>
                     </div>
