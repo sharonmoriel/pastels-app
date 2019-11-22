@@ -30,7 +30,7 @@
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
       <div class="card-body">
 
-          <% @my_orders.each do |order| %>
+          <% @orders_placed.each do |order| %>
 
             <div class="card">
               <h5 class="card-header">Order #<%= order.id %></h5>
@@ -41,8 +41,7 @@
                   <label>Quantity:</label> <%= order.quantity %><br>
                   <label>Price:</label> <%= order.pastel.price %><br>
                 </p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-                <%= link_to "Delete", order_path(order.id), method: :delete, confirm: "Positive?", title: "Delete" %>
+                <%= link_to "Delete", order_path(order.id), method: :delete, confirm: "Positive?", title: "Delete", class:"btn btn-danger" %>
               </div>
             </div>
             <br>
@@ -62,7 +61,7 @@
     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
       <div class="card-body">
 
-          <% @orders_to_me.each do |order| %>
+          <% @orders_received.each do |order| %>
 
             <div class="card">
               <h5 class="card-header">Order #<%= order.id %></h5>
