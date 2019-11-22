@@ -23,39 +23,77 @@
     <div class="card-header" id="headingTwo">
       <h2 class="mb-0">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          <i class="fas fa-caret-down"></i> Orders
+          <i class="fas fa-caret-down"></i> My orders
         </button>
       </h2>
     </div>
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
       <div class="card-body">
 
-        <ul class="list-unstyled">
           <% @my_orders.each do |order| %>
-            <li class="media mb-3">
-              <%= cl_image_tag order.pastel.photo, class: 'img-order' %>
-              <div class="media-body">
-                <p><label>Pastel:</label> <%= order.pastel.name %></p>
-                <p><label>Order created at:</label> <%= order.created_at.strftime("%Y/%m/%d %H:%M:%S") %></p>
-                <p><label>Quantity:</label> <%= order.quantity %></p>
-                <p><label>Price:</label> <%= order.pastel.price %></p>
-              </div>
-            </li>
-          <% end %>
-        </ul>
 
+            <div class="card">
+              <h5 class="card-header">Order #<%= order.id %></h5>
+              <div class="card-body">
+                <h5 class="card-title">Pastel: <%= order.pastel.name%></h5>
+                <p class="card-text">
+                  <label>Order created at:</label> <%= order.created_at.strftime("%Y/%m/%d %H:%M:%S") %><br>
+                  <label>Quantity:</label> <%= order.quantity %><br>
+                  <label>Price:</label> <%= order.pastel.price %><br>
+                </p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <%= link_to "Delete", order_path(order.id), method: :delete, confirm: "Positive?", title: "Delete" %>
+              </div>
+            </div>
+            <br>
+          <% end %>
       </div>
     </div>
   </div>
+
   <div class="card">
     <div class="card-header" id="headingThree">
       <h2 class="mb-0">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-          <i class="fas fa-caret-down"></i> Pastels
+          <i class="fas fa-caret-down"></i> Orders to me
         </button>
       </h2>
     </div>
     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+      <div class="card-body">
+
+          <% @orders_to_me.each do |order| %>
+
+            <div class="card">
+              <h5 class="card-header">Order #<%= order.id %></h5>
+              <div class="card-body">
+                <h5 class="card-title">Pastel: <%= order.pastel.name%></h5>
+                <p class="card-text">
+                  <label>Order created at:</label> <%= order.created_at.strftime("%Y/%m/%d %H:%M:%S") %><br>
+                  <label>Quantity:</label> <%= order.quantity %><br>
+                  <label>Price:</label> <%= order.pastel.price %><br>
+                  <label>Buyer:</label> <%= order.user.first_name %> <%= order.user.last_name %><br>
+                </p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+            <br>
+          <% end %>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-header" id="headingFour">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+          <i class="fas fa-caret-down"></i> Pastels
+        </button>
+      </h2>
+    </div>
+    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
       <div class="card-body">
         <!-- old -->
         <div class="container">
