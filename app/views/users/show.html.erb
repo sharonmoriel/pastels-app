@@ -1,33 +1,86 @@
+<!-- User Dashboard -->
 
-<div class="container">
-  <h1 class="text-center">My Pastels</h1>
-  <div class="row d-flex justify-content-center">
-    <div class="cards">
 
-      <% @my_pastels.each do |pastel| %>
-      <div class="card m-2" style="width: 18rem;">
-        <%= link_to pastel, class: 'btn' do %>
-        <img class="card-img-top" src="https://source.unsplash.com/1600x900/?pastel-de-nata" alt="Card image cap">
-        <% end %>
-        <div class="card-body">
-          <!-- <h5 class="card-title"><%= pastel.name %></h5> -->
-          <div class="d-flex justify-content-between">
-            <p class="card-text"><%= pastel.description %></p>
-            <p class="card-text float-right">€ <%= pastel.price %></p>
+<div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h2 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Profile
+        </button>
+      </h2>
+    </div>
+
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+        <label>Name:</label> <%= "#{@user.first_name} #{@user.last_name}" %><br>
+        <label>Email:</label> <%= @user.email %>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Orders
+        </button>
+      </h2>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+      <div class="card-body">
+
+
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Pastels
+        </button>
+      </h2>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+      <div class="card-body">
+        <!-- old -->
+        <div class="container">
+          <h1 class="text-center">My Pastels</h1>
+          <div class="row d-flex justify-content-center">
+            <div class="cards">
+              <% @my_pastels.each do |pastel| %>
+              <div class="card m-2" style="width: 18rem;">
+                <%= link_to pastel, class: 'btn' do %>
+                <img class="card-img-top" src="https://source.unsplash.com/1600x900/?pastel-de-nata" alt="Card image cap">
+                <% end %>
+                <div class="card-body">
+                  <!-- <h5 class="card-title"><%= pastel.name %></h5> -->
+                  <div class="d-flex justify-content-between">
+                    <p class="card-text"><%= pastel.description %></p>
+                    <p class="card-text float-right">€ <%= pastel.price %></p>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center m-2">
+                  <%= link_to 'Details', pastel, class: 'btn btn-outline-secondary' %>
+                  <!-- modal button -->
+                  <%= link_to pastel_path(pastel),  {'data-toggle' =>  "modal", 'data-target' => '#orderModalCenter', class: 'btn btn-sm btn-outline-secondary my-0'} do %>
+                  <i class="fas fa-plus mr-1"></i>Order me!
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+            </div>
           </div>
         </div>
-        <div class="d-flex justify-content-between align-items-center m-2">
-          <%= link_to 'Details', pastel, class: 'btn btn-outline-secondary' %>
-          <!-- modal button -->
-          <%= link_to pastel_path(pastel),  {'data-toggle' =>  "modal", 'data-target' => '#orderModalCenter', class: 'btn btn-sm btn-outline-secondary my-0'} do %>
-          <i class="fas fa-plus mr-1"></i>Order me!
-          <% end %>
-        </div>
+
       </div>
-    <% end %>
     </div>
   </div>
 </div>
+
+
+
+
 
 <!-- Modal -->
 <div class="modal fade" id="orderModalCenter" tabindex="-1" role="dialog" aria-labelledby="orderModalCenterTitle" aria-hidden="true">
