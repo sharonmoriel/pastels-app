@@ -37,7 +37,7 @@ class PastelsController < ApplicationController
     authorize @pastel
 
     if @pastel.save
-      redirect_to pastels_path
+      redirect_to user_path(current_user)
     else
       render :new
     end
@@ -50,7 +50,7 @@ class PastelsController < ApplicationController
   def update
     authorize @pastel
     if @pastel.update(pastel_params)
-      redirect_to pastel_path(@pastel)
+      redirect_to user_path(current_user)
     else
       render :edit # print edit.html.erb
     end
@@ -59,6 +59,7 @@ class PastelsController < ApplicationController
   def destroy
     authorize @pastel
     @pastel.destroy
+    redirect_to user_path(current_user)
   end
 
   private

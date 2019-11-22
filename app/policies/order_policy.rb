@@ -24,4 +24,8 @@ class OrderPolicy < ApplicationPolicy
   def destroy?
     record.user == user  # Only restaurant creator can update it
   end
+
+  def review?
+    record.user == user  # Only restaurant creator can update it
+  end
 end

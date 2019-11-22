@@ -17,9 +17,7 @@
       <div class="cards">
         <% @pastels.each do |pastel| %>
         <div class="card card-shadow m-2" style="max-width: 18rem;">
-          <%= link_to pastel, class: 'btn' do %>
           <%= cl_image_tag pastel.photo, class: 'card-img-top' %>
-          <% end %>
 
           <!-- Review Modal button -->
           <span>

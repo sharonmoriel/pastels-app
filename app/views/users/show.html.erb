@@ -42,8 +42,44 @@
                   <label>Price:</label> <%= order.pastel.price %><br>
                 </p>
                 <%= link_to "Delete", order_path(order.id), method: :delete, confirm: "Positive?", title: "Delete", class:"btn btn-danger" %>
+                <%= link_to 'Update Order', edit_order_path(order), class: 'btn btn-outline-secondary' %>
+
+                <!-- Review modal button -->
+
+                <% disabled_button = order.review.nil? ? "" : "disabled" %>
+                <% if DateTime.now > order.order_date %>
+                  <%= link_to 'Review', review_order_path(order), {'data-toggle' =>  "modal", 'data-target' => "#addReviewModalCenter-#{order.id}", class: "btn btn-success #{disabled_button}", id: "reviewButton"} %>
+                <% else %>
+                  <%= link_to 'Review', review_order_path(order), {'data-toggle' =>  "modal", 'data-target' => "#addReviewModalCenter-#{order.id}", class: 'btn btn-light disabled'} %>
+                <% end %>
               </div>
             </div>
+
+            <!-- Add a review modal -->
+
+              <div class="modal fade" id="addReviewModalCenter<%= order.id %>" tabindex="-1" role="dialog" aria-labelledby="addReviewModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="addReviewModalLongTitle">Please review</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <%= simple_form_for order do |f| %>
+                      <%= f.input :review %>
+                      <div class="d-flex justify-content-between">
+                        <%= f.button :submit, "Add a review", class: 'btn btn-success', id: '#reviewSubmitButton' %>
+                        <%= f.button :button, 'Cancel', :type => 'reset', class: "btn btn-outline-secondary mb-2", data: { dismiss: "modal", target: "#addReviewModalCenter" } =%>
+                      </div>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            <!-- End of add review modal -->
             <br>
           <% end %>
       </div>
@@ -149,8 +185,22 @@
                 <p class="card-text"><%= pastel.stock %> pastels available</p>
               </div>
 
-              <div class="d-flex justify-content-between align-items-center m-2">
-                <p></p>
+              <div class="d-flex justify-content-between align-items-center my-2 mx-3">
+                <div class="card-text float-left">
+
+                  <!-- Updating / Deleting a pastel -->
+
+                  <% if policy(pastel).edit? %>
+                  <%= link_to 'Edit', edit_pastel_path(pastel), class: 'btn btn-sm btn-outline-secondary' %>
+                  <% end %>
+                  <% if policy(pastel).destroy? %>
+                  <%= link_to 'Remove', pastel_path(pastel), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %>
+                  <% end %>
+
+
+                  <!-- #### -->
+                </div>
+
                 <p class="card-text float-right">€ <%= pastel.price %></p>
               </div>
             </div>
